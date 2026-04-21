@@ -1,16 +1,23 @@
 {% extends "base.html.twig" %}
 
-{% block title %}Categorie{% endblock %}
+{% block title %}Categorie
+{% endblock %}
 
 {% block body %}
-    <h1> {{category.name}} </h1>
-    <div>
-        <a href="{{path('category_edit', {id: category.id})}}">
-            Modifier la catégorie
-        </a>
-        <form action="">
-            <button>Supprimer</button>
-        </form>
-    </div>
+	<h1>
+		{{category.name}}
+	</h1>
+	<div>
+		<a href="{{path('category_edit', {id: category.id})}}">
+			Modifier la catégorie
+		</a>
+		<form action="{{path('category_delete')}}" 
+                method="post" 
+                onsubmit="return confirm('Supprimer??')"
+            >
+            <input type="hidden" name="id" value="{{category.id}}"> 
+			<button>Supprimer</button>
+		</form>
+	</div>
 
 {% endblock %}

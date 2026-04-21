@@ -41,6 +41,23 @@ final class CategoryController extends AbstractController
         ]);
     }
 
+    #[Route('/categories/delete', name: 'category_delete')]
+    public function delete(Request $request, CategoryRepository $repo, EntityManagerInterface $em): Response
+    {
+        $id = $request->getPayload()->get('id');
+        $cat = $repo->find($id);
+
+        if ($cat == null) {
+            throw $this->createNotFoundException();
+        }
+
+        $em->remove($cat);
+        $em->flush();
+        
+        return $this->redirectToRoute('category_index');
+
+    }
+
     #[Route('/categories/{id}', name: 'category_show')]
     public function show(Category $cat): Response
     {
