@@ -10,8 +10,13 @@
     {% for task in tasks %}
         <div>
             <h2> {{task.title}} </h2>
-            <p>Fait: {{task.isDone ? 'Oui': 'Non'}} </p>
-            <p>Créé le {{task.createdAt | date('d/m/Y H:i:s')}} </p>
+            <form action="" >
+                <label for="">
+                    Fait
+                    <input type="checkbox" name="isDone" onchange="submit()">
+                </label>
+            </form>
+            <small>Créé le {{task.createdAt | date('d/m/Y H:i:s')}} </small>
         </div>
         <hr>
     {% endfor %}

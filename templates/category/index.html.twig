@@ -5,12 +5,12 @@
 {% block body %}
 
     <h1>Liste des catégories</h1>
-    <a href="{{path('category_new')}}">Ajouter une catégorie</a>
+    <a class="btn btn-success mb-2" href="{{path('category_new')}}">Ajouter une catégorie</a>
 
-    <ul>
+    <ul class="list-group">
         {% for category in categories %}
         
-            <li>
+            <li class="list-group-item">
                 <a href="{{path('category_show', {id: category.id})}}">
                     {{category.name}}
                 </a>

@@ -7,8 +7,8 @@
 	<h1>
 		{{category.name}}
 	</h1>
-	<div>
-		<a href="{{path('category_edit', {id: category.id})}}">
+	<div class="d-flex gap-2">
+		<a class="btn btn-dark" href="{{path('category_edit', {id: category.id})}}">
 			Modifier la catégorie
 		</a>
 		<form action="{{path('category_delete')}}" 
@@ -16,7 +16,7 @@
                 onsubmit="return confirm('Supprimer??')"
             >
             <input type="hidden" name="id" value="{{category.id}}"> 
-			<button>Supprimer</button>
+			<button class="btn btn-danger">Supprimer</button>
 		</form>
 	</div>
 

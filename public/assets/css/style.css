@@ -1,0 +1,26 @@
+body, ul, li{
+   margin:0;
+   padding: 0;
+}
+
+.page-layout{
+    margin: 0 4em;
+}
+
+header{
+     background-color: #7c7b7b;
+     line-height: 400%;
+     padding: 0 2em;
+}
+
+header ul{
+    display: flex;
+    list-style-type: none;
+    gap: 1em;
+}
+
+header a{
+    text-decoration: none;
+    color: rgb(229, 237, 229);
+    font-size: 1.8em;
+}
