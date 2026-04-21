@@ -32,7 +32,7 @@ final class CategoryController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $em->persist($category);
             $em->flush();
-            
+
             return $this->redirectToRoute('category_index');
         }
 
@@ -41,10 +41,27 @@ final class CategoryController extends AbstractController
         ]);
     }
 
-    #[Route('/categories/{id}', name:'category_show')]
-    public function show($id, CategoryRepository $repo): Response{
+    #[Route('/categories/{id}', name: 'category_show')]
+    public function show(Category $cat): Response
+    {
         return $this->render('category/show.html.twig', [
-            'category'=> $repo->find($id)
+            'category' => $cat
+        ]);
+    }
+
+    #[Route('/categories/{id}/edit', name: 'category_edit')]
+    public function edit(Category $cat, Request $request, EntityManagerInterface $em): Response
+    {
+        $form = $this->createForm(CategoryType::class, $cat);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->flush();
+            return $this->redirectToRoute('category_show', ['id' => $cat->getId()]);
+        }
+
+        return $this->render('category/edit.html.twig', [
+            'form' => $form
         ]);
     }
 }

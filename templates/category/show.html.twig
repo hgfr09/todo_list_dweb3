@@ -4,6 +4,13 @@
 
 {% block body %}
     <h1> {{category.name}} </h1>
-
+    <div>
+        <a href="{{path('category_edit', {id: category.id})}}">
+            Modifier la catégorie
+        </a>
+        <form action="">
+            <button>Supprimer</button>
+        </form>
+    </div>
 
 {% endblock %}
