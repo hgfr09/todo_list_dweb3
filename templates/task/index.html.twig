@@ -1,24 +1,31 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} Liste tâches {% endblock %}
+{% block title %}
+	Liste tâches
+{% endblock %}
 
 {% block body %}
-    <h1>Toutes les tâches</h1>
+	<h1>Toutes les tâches</h1>
 
-    {{form(form)}}
-    
-    {% for task in tasks %}
-        <div>
-            <h2> {{task.title}} </h2>
-            <form action="" >
-                <label for="">
-                    Fait
-                    <input type="checkbox" name="isDone" onchange="submit()">
-                </label>
-            </form>
-            <small>Créé le {{task.createdAt | date('d/m/Y H:i:s')}} </small>
-        </div>
-        <hr>
-    {% endfor %}
+	{{form(form)}}
 
-{% endblock %}
+		{% for task in tasks %}
+			<div>
+				<h2>
+					{{task.title}}
+				</h2>
+				<form action="{{path('task_complete')}}" method="POST">
+					<input type="hidden" name="id" value="{{task.id}}">
+					<label for="">
+						Fait
+						<input {{task.isDone?'checked':''}} type="checkbox" onchange="submit()">
+					</label>
+				</form>
+				<small>Créé le
+					{{task.createdAt | date('d/m/Y H:i:s')}}
+				</small>
+			</div>
+			<hr>
+		{% endfor %}
+
+	{% endblock %}
