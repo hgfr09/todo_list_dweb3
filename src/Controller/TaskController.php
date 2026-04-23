@@ -26,6 +26,8 @@ final class TaskController extends AbstractController
             $em->persist($task);
             $em->flush();
 
+            $this->addFlash('success', 'La tâche a été ajoutée avec succès.');
+
             return $this->redirectToRoute('task_index');
         }
 
@@ -48,6 +50,8 @@ final class TaskController extends AbstractController
         $task->setIsDone(!$task->isDone());
         $em->flush();
 
+        $this->addFlash('success', 'La tâche a étée modifiée avec succès.');
+
         return $this->redirectToRoute('task_index');
     }
 
@@ -63,6 +67,8 @@ final class TaskController extends AbstractController
 
         $em->remove($task);
         $em->flush();
+
+        $this->addFlash('success', 'La tâche a été supprimée avec succès.');
 
         return $this->redirectToRoute('task_index');
     }
