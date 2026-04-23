@@ -11,9 +11,19 @@
 
 		{% for task in tasks %}
 			<div>
-				<h2>
-					{{task.title}}
-				</h2>
+				<div class="d-flex align-items-start gap-5">
+                    <h2>
+					    {{task.title}}
+				    </h2>
+                    <form action="{{path('task_delete')}}" 
+                          method="POST"
+                          onsubmit="return confirm('Supprimer??')"
+                          >
+                        <input type="hidden" name="id" value="{{task.id}}">
+                        <button class="p-0 text-danger fs-3 btn"><i class="bi bi-trash-fill"></i></button>
+                    </form>
+                </div>
+
 				<form action="{{path('task_complete')}}" method="POST">
 					<input type="hidden" name="id" value="{{task.id}}">
 					<label for="">

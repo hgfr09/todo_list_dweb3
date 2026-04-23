@@ -41,7 +41,7 @@ final class TaskController extends AbstractController
         $id = $request->getPayload()->get('id');
         $task = $repo->find($id);
 
-        if($task === null){
+        if ($task === null) {
             throw $this->createNotFoundException();
         }
 
@@ -49,6 +49,21 @@ final class TaskController extends AbstractController
         $em->flush();
 
         return $this->redirectToRoute('task_index');
+    }
 
+    #[Route('/tasks/delete', name: 'task_delete')]
+    public function delete(Request $request, TaskRepository $repo, EntityManagerInterface $em): Response
+    {
+        $id = $request->getPayload()->get('id');
+        $task = $repo->find($id);
+
+        if ($task === null) {
+            throw $this->createNotFoundException();
+        }
+
+        $em->remove($task);
+        $em->flush();
+
+        return $this->redirectToRoute('task_index');
     }
 }
