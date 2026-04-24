@@ -4,11 +4,8 @@ namespace App\Form;
 
 use App\Entity\Category;
 use App\Entity\Task;
-use Doctrine\DBAL\Types\TextType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -19,8 +16,8 @@ class TaskType extends AbstractType
         $builder
             ->add('title')
             ->add('category', EntityType::class, [
-                'class'=> Category::class,
-                'choice_label'=> 'name'
+                'class' => Category::class,
+                'choice_label' => 'name'
             ])
         ;
     }
