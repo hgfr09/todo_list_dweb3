@@ -1,5 +1,15 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+	<style>
+		.stroke{
+			text-decoration: line-through;
+			color: #ccc;
+			font-style: italic;
+		}
+	</style>
+{% endblock %}
+
 {% block title %}
 	Liste tâches
 {% endblock %}
@@ -20,7 +30,9 @@
 			<div>
 				<div class="d-flex align-items-start gap-5">
                     <h2 class="d-flex align-items-start gap-2">
-					    <span>{{task.title}}</span> 
+					    <span class="{{task.isDone?'stroke':''}}">
+							{{task.title}}
+						</span> 
 						<span class="badge rounded-pill text-bg-warning fs-6 fst-italic">
 							{{task.category.name}}
 						</span>						
@@ -39,10 +51,10 @@
 
 				<form action="{{path('task_complete')}}" method="POST">
 					<input type="hidden" name="id" value="{{task.id}}">
-					<label for="">
-						Fait
-						<input {{task.isDone?'checked':''}} type="checkbox" onchange="submit()">
-					</label>
+					
+					<div class="form-check form-switch">
+						<input {{task.isDone?'checked':''}} onchange="submit()" class="form-check-input" type="checkbox" >
+					</div>
 				</form>
 				<small>Créé le
 					{{task.createdAt | date('d/m/Y H:i:s')}}
